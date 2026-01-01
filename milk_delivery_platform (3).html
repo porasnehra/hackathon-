@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MilkDirect - AI • Blockchain • IoT Powered</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #0891b2 50%, #3b82f6 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content h1 {
+            font-size: 28px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-content p {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.95;
+        }
+
+        .notification-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .notification-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* AI Recommendations Card */
+        .ai-card {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .ai-card h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-card ul {
+            list-style: none;
+        }
+
+        .ai-card li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .ai-card li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+
+        /* Search Box */
+        .search-box {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .search-box input::placeholder {
+            color: #999;
+        }
+
+        .search-icon {
+            color: #999;
+            font-size: 20px;
+        }
+
+        /* Featured Farmers Section */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Farmer Card */
+        .farmer-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .farmer-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .farmer-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 16px;
+        }
+
+        .farmer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #10b981, #0891b2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .farmer-info {
+            flex: 1;
+        }
+
+        .farmer-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .farmer-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blockchain-badge {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* IoT Quality Data */
+        .iot-data {
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 16px;
+            border-left: 4px solid #10b981;
+        }
+
+        .iot-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #065f46;
+            margin-bottom: 12px;
+        }
+
+        .iot-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .metric-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .excellent {
+            color: #10b981;
+        }
+
+        .live-indicator {
+            color: #ef4444;
+            font-size: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .nav-item {
+            padding: 12px;
+            text-align: center;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-top: 3px solid transparent;
+        }
+
+        .nav-item.active {
+            color: #3b82f6;
+            border-top-color: #3b82f6;
+        }
+
+        .nav-item:hover {
+            background: #f9fafb;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Add to Cart Button */
+        .add-to-cart {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 12px;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .price-tag {
+            font-size: 24px;
+            font-weight: 700;
+            color: #10b981;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1>🥛 MilkDirect</h1>
+            <p>AI • Blockchain • IoT Powered</p>
+        </div>
+        <button class="notification-btn">🔔</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- AI Recommendations -->
+        <div class="ai-card">
+            <h2>🤖 AI Recommendations</h2>
+            <ul>
+                <li>Based on your previous orders, try Green Valley Farm's new A2 milk</li>
+                <li>Peak demand predicted for weekend - order now for guaranteed delivery</li>
+                <li>Quality alert: All farmers showing excellent IoT readings today</li>
+            </ul>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search farmers or milk types...">
+        </div>
+
+        <!-- Featured Farmers Section -->
+        <h3 class="section-header">
+            <span>👨‍🌾</span> Featured Farmers
+        </h3>
+
+        <!-- Farmer Card 1 -->
+        <div class="farmer-card">
+            <div class="farmer-header">
+                <div class="farmer-avatar">🐄</div>
+                <div class="farmer-info">
+                    <div class="farmer-name">Green Valley Farm</div>
+                    <div class="farmer-meta">
+                        <span class="meta-item">📍 12 km away</span>
+                        <span class="blockchain-badge">🔗 Blockchain Verified</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-name">Organic Whole Milk</div>
+            <div class="product-desc">Fresh organic milk from grass-fed cows</div>
+
+            <div class="tags">
+                <span class="tag">Organic</span>
+                <span class="tag">Non-GMO</span>
+            </div>
+
+            <div class="iot-data">
+                <div class="iot-header">
+                    🔗 Live IoT Quality Data <span class="live-indicator">● LIVE</span>
+                </div>
+                <div class="iot-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Temp</div>
+                        <div class="metric-value">4°C</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Quality</div>
+                        <div class="metric-value excellent">Excellent</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Updated</div>
+                        <div class="metric-value">2 mins ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="price-tag">₹58/L</div>
+            <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+
+        <!-- Farmer Card 2 -->
+        <div class="farmer-card">
+            <div class="farmer-header">
+                <div class="farmer-avatar">🐃</div>
+                <div class="farmer-info">
+                    <div class="farmer-name">Krishna Dairy Farm</div>
+                    <div class="farmer-meta">
+                        <span class="meta-item">📍 8 km away</span>
+                        <span class="blockchain-badge">🔗 Blockchain Verified</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-name">Premium Buffalo Milk</div>
+            <div class="product-desc">Rich and creamy buffalo milk, high fat content</div>
+
+            <div class="tags">
+                <span class="tag">Premium</span>
+                <span class="tag">High Fat</span>
+            </div>
+
+            <div class="iot-data">
+                <div class="iot-header">
+                    🔗 Live IoT Quality Data <span class="live-indicator">● LIVE</span>
+                </div>
+                <div class="iot-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Temp</div>
+                        <div class="metric-value">3°C</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Quality</div>
+                        <div class="metric-value excellent">Excellent</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Updated</div>
+                        <div class="metric-value">5 mins ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="price-tag">₹65/L</div>
+            <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+
+        <!-- Farmer Card 3 -->
+        <div class="farmer-card">
+            <div class="farmer-header">
+                <div class="farmer-avatar">🌱</div>
+                <div class="farmer-info">
+                    <div class="farmer-name">Sunshine Organic Dairy</div>
+                    <div class="farmer-meta">
+                        <span class="meta-item">📍 15 km away</span>
+                        <span class="blockchain-badge">🔗 Blockchain Verified</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-name">A2 Organic Milk</div>
+            <div class="product-desc">Special A2 protein milk from desi cows</div>
+
+            <div class="tags">
+                <span class="tag">A2 Protein</span>
+                <span class="tag">Organic</span>
+                <span class="tag">Desi Cow</span>
+            </div>
+
+            <div class="iot-data">
+                <div class="iot-header">
+                    🔗 Live IoT Quality Data <span class="live-indicator">● LIVE</span>
+                </div>
+                <div class="iot-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Temp</div>
+                        <div class="metric-value">4°C</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Quality</div>
+                        <div class="metric-value excellent">Excellent</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Updated</div>
+                        <div class="metric-value">1 min ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="price-tag">₹72/L</div>
+            <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-label">Home</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">🛒</div>
+            <div class="nav-label">Cart</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">📦</div>
+            <div class="nav-label">Orders</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">👤</div>
+            <div class="nav-label">Profile</div>
+        </a>
+    </div>
+
+    <script>
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.textContent = '✓ Added to Cart';
+                this.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    this.textContent = '🛒 Add to Cart';
+                    this.style.background = 'linear-gradient(135deg, #3b82f6, #6366f1)';
+                }, 2000);
+            });
+        });
+
+        // Simulate live IoT data updates
+        setInterval(() => {
+            document.querySelectorAll('.metric-value').forEach(el => {
+                if (el.textContent.includes('mins ago') || el.textContent.includes('min ago')) {
+                    const currentMins = parseInt(el.textContent);
+                    if (currentMins < 10) {
+                        el.textContent = (currentMins + 1) + ' mins ago';
+                    }
+                }
+            });
+        }, 60000);
+
+        // Card click to expand details
+        document.querySelectorAll('.farmer-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-4px)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
